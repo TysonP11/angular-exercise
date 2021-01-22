@@ -11,7 +11,15 @@
                 </tr>
             </thead>
             <tbody>
-                <app-user-item *ngFor="let user of users; let i = index" [indexOfUser]="i" [user]="user"></app-user-item>
+                <tr *ngFor="let user of formatedUsers; let i = index">
+                    <!-- <app-user-item [indexOfUser]="i" [user]="user"></app-user-item> -->
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{user.name}}</td>
+                    <td>{{user.age}}</td>
+                    <td>{{user.birthDay}}</td>
+                    <td>{{user.gender}}</td>
+                </tr>
+                
             </tbody>
         </table>
         
