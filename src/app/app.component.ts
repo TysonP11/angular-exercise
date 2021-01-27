@@ -1,5 +1,6 @@
+import { UserService } from './core/services/user.service';
 import { User } from './core/models/user.model';
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,19 @@ export class AppComponent {
   title = 'odd-even-game';
   users : User[] = []
 
-  onUserSubmit(newUser: User){
-    this.users.push(newUser)
+  constructor(private userService: UserService) {
+    
   }
+
+  ngOnInit(): void {
+    this.users = this.userService.getUsers()
+    this.userService.usersChanged
+      .subscribe(
+        (users: User[]) => {
+          this.users = users
+        }
+      )    
+  }
+  
+
 }

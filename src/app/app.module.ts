@@ -1,3 +1,4 @@
+import { UserService } from './core/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -24,7 +25,7 @@ import { UserItemComponent } from './user/user-list/user-item/user-item.componen
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

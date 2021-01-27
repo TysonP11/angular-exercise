@@ -1,28 +1,11 @@
 <div class="row">
     <div class="col-xs-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Birthday</th>
-                    <th scope="col">Gender</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of formatedUsers; let i = index">
-                    <!-- <app-user-item [indexOfUser]="i" [user]="user"></app-user-item> -->
-                    <th scope="row">{{i + 1}}</th>
-                    <td>{{user.name}}</td>
-                    <td>{{user.age}}</td>
-                    <td>{{user.birthDay}}</td>
-                    <td>{{user.gender}}</td>
-                </tr>
-                
-            </tbody>
-        </table>
-        
+        <ul class="list-group">
+            <app-user-item 
+                *ngFor="let user of users"
+                [user]="user"
+            ></app-user-item>
+        </ul>        
     </div>
 </div>
 

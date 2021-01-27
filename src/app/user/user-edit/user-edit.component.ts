@@ -1,3 +1,4 @@
+import { UserService } from './../../core/services/user.service';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/core/models/user.model';
 
@@ -13,14 +14,12 @@ export class UserEditComponent implements OnInit {
   @ViewChild('dob') dobInput: ElementRef
   @ViewChild('gender') genderInput: ElementRef
 
-  @Output() userSubmitted = new EventEmitter<User>()
-
   handleSubmit(){
     const newUser = new User(this.nameInput.nativeElement.value, this.ageInput.nativeElement.value, this.dobInput.nativeElement.valueAsDate, this.genderInput.nativeElement.value)
-    this.userSubmitted.emit(newUser)
+    this.userService.addUser(newUser)
   }
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
