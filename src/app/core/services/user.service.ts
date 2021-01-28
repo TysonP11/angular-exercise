@@ -6,7 +6,7 @@ Injectable()
 export class UserService {
 
     users : User[] = users
-    usersChanged = new EventEmitter<User[]>()
+    usersChanged = new EventEmitter<User>()
 
     getUsers() {
         return this.users.slice()
@@ -14,7 +14,7 @@ export class UserService {
 
     addUser(user: User){
         this.users.push(user)
-        this.usersChanged.emit(this.users.slice())
+        this.usersChanged.emit(user)
     }
 
 

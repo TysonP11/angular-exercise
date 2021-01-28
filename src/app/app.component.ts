@@ -18,8 +18,8 @@ export class AppComponent {
     this.users = this.userService.getUsers()
     this.userService.usersChanged
       .subscribe(
-        (users: User[]) => {
-          this.users = users
+        (user: User) => {
+          this.users = this.userService.getUsers()
         }
       )    
   }
