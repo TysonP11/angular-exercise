@@ -11,8 +11,7 @@ export class AppComponent {
   title = 'odd-even-game';
   users : User[] = []
 
-  constructor(private userService: UserService) {
-    
+  constructor(private userService: UserService) {    
   }
 
   ngOnInit(): void {
@@ -24,6 +23,4 @@ export class AppComponent {
         }
       )    
   }
-  
-
 }
