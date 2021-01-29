@@ -9,7 +9,23 @@ export class UserService {
     usersChanged = new EventEmitter<User>()
 
     getUsers() {
-        return this.users.slice()
+        return this.users.filter((user) => {
+            return user.validated === false
+        })
+    }
+
+    getValidatedUsers() {
+        return this.users.filter((user) => {
+            return user.validated === true
+        })
+    }
+
+    validateUser(id: number) {
+        for ( let i = 0; i < this.users.length; i++) {
+            if (users[i].validated === false && i === id) {
+                users[i].validated = true
+            }
+        }
     }
 
     addUser(user: User){

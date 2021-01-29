@@ -9,10 +9,16 @@ import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
 export class UserItemComponent implements OnInit {
 
   @Input() user: User
+  shownUser
 
   constructor() { }
 
   ngOnInit(): void {
+    this.shownUser = {...this.user, status: this.user.validated === true ? 'valid' : 'invalid'}
+  }
+
+  validateUser(id: number) {
+
   }
 
 }

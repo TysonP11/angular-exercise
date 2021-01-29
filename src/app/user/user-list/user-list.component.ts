@@ -1,15 +1,37 @@
 import { User } from 'src/app/core/models/user.model';
 import { UserService } from './../../core/services/user.service';
 import { AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
 
-  @Input() users : User[]; 
+  users : User[]; 
+  viewingValidatedUsers = false
+
+  constructor (private userService: UserService, private route: ActivatedRoute) {
+
+  }
+
+  ngOnInit() {
+    this.viewingValidatedUsers = this.route.snapshot.routeConfig.path === "validated"
+
+    if(this.viewingValidatedUsers) {
+      this.users = this.userService.getValidatedUsers()
+    } else {
+      this.users = this.userService.getUsers()
+      this.userService.usersChanged.subscribe(
+        (user: User) => {
+        this.users = this.userService.getUsers()
+        }
+      )
+    }
+    
+  }
   //formatedUsers = []
 
   // formatDate(date) {

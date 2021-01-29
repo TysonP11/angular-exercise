@@ -23,7 +23,7 @@ export class UserEditComponent implements OnInit {
     const birthDay = newUser.value.dob.split("-")
     const formatedBirthDay = new Date(birthDay[0], birthDay[1] - 1, birthDay[2])
     
-    const formData = {...newUser.value, birthDay: formatedBirthDay}
+    const formData = {...newUser.value, birthDay: formatedBirthDay, validated: false}
     this.userService.addUser(formData)
   }
 
