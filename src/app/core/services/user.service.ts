@@ -26,6 +26,7 @@ export class UserService {
                 users[i].validated = true
             }
         }
+        this.usersChanged.emit(this.users[0])
     }
 
     addUser(user: User){

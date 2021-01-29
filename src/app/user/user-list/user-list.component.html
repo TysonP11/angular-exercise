@@ -2,8 +2,9 @@
     <div class="col-xs-12">
         <ul class="list-group">
             <app-user-item 
-                *ngFor="let user of users"
+                *ngFor="let user of users; let i = index"
                 [user]="user"
+                [index]="i"
             ></app-user-item>
         </ul>        
     </div>

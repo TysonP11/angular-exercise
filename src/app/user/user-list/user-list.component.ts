@@ -11,6 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   users : User[]; 
+  
   viewingValidatedUsers = false
 
   constructor (private userService: UserService, private route: ActivatedRoute) {
