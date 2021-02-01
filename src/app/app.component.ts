@@ -9,21 +9,11 @@ import { Component, OnChanges, SimpleChange } from '@angular/core';
 })
 export class AppComponent {
   title = 'odd-even-game';
-  users : User[] = []
-
-  constructor(private userService: UserService) {
-    
+ 
+  constructor(private userService: UserService) {    
   }
 
   ngOnInit(): void {
-    this.users = this.userService.getUsers()
-    this.userService.usersChanged
-      .subscribe(
-        (users: User[]) => {
-          this.users = users
-        }
-      )    
+       
   }
-  
-
 }

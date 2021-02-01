@@ -1,3 +1,4 @@
+import { UserService } from './../../../core/services/user.service';
 import { User } from './../../../core/models/user.model';
 import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
 
@@ -9,10 +10,19 @@ import { Component, Input, OnInit, AfterViewChecked } from '@angular/core';
 export class UserItemComponent implements OnInit {
 
   @Input() user: User
+  shownUser
+  @Input() index: number
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.shownUser = {...this.user, status: this.user.validated === true ? 'valid' : 'invalid'}
+  }
+
+  validateUser() {
+    this.userService.validateUser(this.index)
+    console.log(typeof this.index)
+   
   }
 
 }

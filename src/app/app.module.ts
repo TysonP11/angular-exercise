@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './core/routing/app-routing.module';
 import { UserService } from './core/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { DropdownDirective } from './core/directives/dropdown.directive';
 import { FormsModule } from '@angular/forms';
 import { UserItemComponent } from './user/user-list/user-item/user-item.component';
-import { UserAddComponent } from './user/user-add/user-add.component';
+import { UserStartComponent } from './user/user-start/user-start.component';
+
 
 
 
@@ -21,11 +23,12 @@ import { UserAddComponent } from './user/user-add/user-add.component';
     UserEditComponent,
     DropdownDirective,
     UserItemComponent,
-    UserAddComponent
+    UserStartComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
