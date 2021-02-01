@@ -11,6 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class UserListComponent implements OnInit {
 
   users : User[]; 
+  isFetching = false;
   
   viewingValidatedUsers = false
 
@@ -24,10 +25,22 @@ export class UserListComponent implements OnInit {
     if(this.viewingValidatedUsers) {
       this.users = this.userService.getValidatedUsers()
     } else {
-      this.users = this.userService.getUsers()
+      // this.users = this.userService.getUsers()
+      this.isFetching = true;
+      this.userService.fetchUsers().subscribe(
+        users => {
+          this.users = users
+          this.isFetching = false
+        }
+      )
       this.userService.usersChanged.subscribe(
         (user: User) => {
-        this.users = this.userService.getUsers()
+          this.userService.fetchUsers().subscribe(
+            users => {
+              this.users = users
+              this.isFetching = false
+            }
+          )
         }
       )
     }

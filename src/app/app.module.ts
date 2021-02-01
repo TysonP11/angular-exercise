@@ -1,7 +1,7 @@
-import { AppRoutingModule } from './core/routing/app-routing.module';
 import { UserService } from './core/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/layout/header/header.component';
@@ -11,6 +11,7 @@ import { DropdownDirective } from './core/directives/dropdown.directive';
 import { FormsModule } from '@angular/forms';
 import { UserItemComponent } from './user/user-list/user-item/user-item.component';
 import { UserStartComponent } from './user/user-start/user-start.component';
+import { AppRoutingModule } from './core/routing/app-routing.module';
 
 
 
@@ -28,7 +29,8 @@ import { UserStartComponent } from './user/user-start/user-start.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
