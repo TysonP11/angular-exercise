@@ -9,6 +9,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { DropdownDirective } from './core/directives/dropdown.directive';
 import { FormsModule } from '@angular/forms';
 import { UserItemComponent } from './user/user-list/user-item/user-item.component';
+import { UserAddComponent } from './user/user-add/user-add.component';
 
 
 
@@ -19,7 +20,8 @@ import { UserItemComponent } from './user/user-list/user-item/user-item.componen
     UserListComponent,
     UserEditComponent,
     DropdownDirective,
-    UserItemComponent
+    UserItemComponent,
+    UserAddComponent
   ],
   imports: [
     BrowserModule,
