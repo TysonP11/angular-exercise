@@ -86,7 +86,7 @@ export class UserService {
                 'https://angular-practice-c0bb9-default-rtdb.firebaseio.com/users.json'
             ).pipe(
                 map(response => {
-                    console.log(response)
+                    
                     const usersArray: User[] = []
                     for (const key in response) {
                         if (response.hasOwnProperty(key)) {

@@ -10,6 +10,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
 
+  headers = ['name', 'age', 'birthDay', 'gender']
+  selectedUsers : User[] = []
   users : User[]; 
   isFetching = false;
   
@@ -17,6 +19,32 @@ export class UserListComponent implements OnInit {
 
   constructor (private userService: UserService, private route: ActivatedRoute) {
 
+  }
+
+  containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i] === obj) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+  checked(user: User){
+    if(this.containsObject(user, this.selectedUsers) === -1) {
+      this.selectedUsers.push(user)
+    }else{
+      this.selectedUsers.splice(this.containsObject(user, this.selectedUsers), 1)
+    }
+  }
+
+  validateUsers(){
+    var i;
+    for (i = 0; i < this.selectedUsers.length; i++) {
+      this.userService.validateUserRequest(this.selectedUsers[i].id)
+    }
   }
 
   ngOnInit() {
@@ -27,15 +55,17 @@ export class UserListComponent implements OnInit {
       this.userService.fetchValidUsers().subscribe(
         users => {
           this.users = users
+          
           this.isFetching = false
         }
       )
     } else {
-      // this.users = this.userService.getUsers()
+      
       this.isFetching = true;
       this.userService.fetchInvalidUsers().subscribe(
         users => {
           this.users = users
+          
           this.isFetching = false
         }
       )
@@ -44,6 +74,7 @@ export class UserListComponent implements OnInit {
           this.userService.fetchInvalidUsers().subscribe(
             users => {
               this.users = users
+              
               this.isFetching = false
             }
           )

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UserItemComponent } from './user/user-list/user-item/user-item.component';
 import { UserStartComponent } from './user/user-start/user-start.component';
 import { AppRoutingModule } from './core/routing/app-routing.module';
+import { TableDataPipe } from './table-data.pipe';
 
 
 
@@ -26,7 +27,8 @@ import { AppRoutingModule } from './core/routing/app-routing.module';
     DropdownDirective,
     UserItemComponent,
     UserStartComponent,
-    GenderPipe
+    GenderPipe,
+    TableDataPipe
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,20 @@
-<div class="row">
-    <div class="col-xs-12">
-        <ul class="list-group">
-            <app-user-item 
-                *ngFor="let user of users; let i = index"
-                [user]="user"
-                [index]="i"
-            ></app-user-item>
-        </ul>        
-    </div>
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let header of headers; let i = index" scope="col">
+                {{header}}
+            </th>
+            <th *ngIf="!viewingValidatedUsers">{{ 'select' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; let i = index">
+                <td *ngFor="let header of headers">{{ user[header] | tableData: header }}</td>
+                <td *ngIf="!viewingValidatedUsers"><input class="form-check-input" type="checkbox" (click)="checked(user)"></td>
+            </tr>
+        </tbody>
+      </table>
+      <button (click)="validateUsers()" class="btn btn-primary" *ngIf="selectedUsers.length > 0">Validate</button>
 </div>
 
