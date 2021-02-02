@@ -1,3 +1,4 @@
+import { GenderPipe } from './core/pipes/gender.pipe';
 import { UserService } from './core/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './core/routing/app-routing.module';
     UserEditComponent,
     DropdownDirective,
     UserItemComponent,
-    UserStartComponent
+    UserStartComponent,
+    GenderPipe
   ],
   imports: [
     BrowserModule,

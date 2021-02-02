@@ -23,19 +23,25 @@ export class UserListComponent implements OnInit {
     this.viewingValidatedUsers = this.route.snapshot.routeConfig.path === "validated"
 
     if(this.viewingValidatedUsers) {
-      this.users = this.userService.getValidatedUsers()
+      this.isFetching = true;
+      this.userService.fetchValidUsers().subscribe(
+        users => {
+          this.users = users
+          this.isFetching = false
+        }
+      )
     } else {
       // this.users = this.userService.getUsers()
       this.isFetching = true;
-      this.userService.fetchUsers().subscribe(
+      this.userService.fetchInvalidUsers().subscribe(
         users => {
           this.users = users
           this.isFetching = false
         }
       )
       this.userService.usersChanged.subscribe(
-        (user: User) => {
-          this.userService.fetchUsers().subscribe(
+        (event: any) => {
+          this.userService.fetchInvalidUsers().subscribe(
             users => {
               this.users = users
               this.isFetching = false

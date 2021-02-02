@@ -25,4 +25,9 @@ export class UserItemComponent implements OnInit {
    
   }
 
+  validateUserRequest(){
+    //console.log(this.user.id)
+    this.userService.validateUserRequest(this.user.id)
+  }
+
 }

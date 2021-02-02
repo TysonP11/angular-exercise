@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators'
 export class UserService {
 
     users : User[] = users
-    usersChanged = new EventEmitter<User>()
+    usersChanged = new EventEmitter<any>()
 
     constructor( private http: HttpClient ) {}
 
@@ -31,7 +31,18 @@ export class UserService {
                 users[i].validated = true
             }
         }
-        this.usersChanged.emit(this.users[0])
+        this.usersChanged.emit(id)
+    }
+
+    validateUserRequest(id: string) {
+        this.http.get(`https://angular-practice-c0bb9-default-rtdb.firebaseio.com/users/${id}.json`).subscribe(
+            response => {
+                this.http.put(`https://angular-practice-c0bb9-default-rtdb.firebaseio.com/users/${id}.json`, {...response, validated: true})
+                    .subscribe(responseData => {
+                        this.usersChanged.emit(responseData)
+                    })
+            }
+        )
     }
 
     addUser(user: User){
@@ -50,16 +61,38 @@ export class UserService {
           );
     }
 
-    fetchUsers() {
+    fetchInvalidUsers() {
         return this.http
             .get< { [key: string]: User }>(
                 'https://angular-practice-c0bb9-default-rtdb.firebaseio.com/users.json'
             ).pipe(
                 map(response => {
+                    console.log(response)
                     const usersArray: User[] = []
                     for (const key in response) {
                         if (response.hasOwnProperty(key)) {
-                          usersArray.push({ ...response[key], id: key });
+                            if(response[key].validated === false){
+                                usersArray.push({ ...response[key], id: key });
+                            }                          
+                        }
+                    }
+                    return usersArray
+                })
+            )
+    }
+    fetchValidUsers() {
+        return this.http
+            .get< { [key: string]: User }>(
+                'https://angular-practice-c0bb9-default-rtdb.firebaseio.com/users.json'
+            ).pipe(
+                map(response => {
+                    console.log(response)
+                    const usersArray: User[] = []
+                    for (const key in response) {
+                        if (response.hasOwnProperty(key)) {
+                            if(response[key].validated === true){
+                                usersArray.push({ ...response[key], id: key });
+                            }                          
                         }
                     }
                     return usersArray
